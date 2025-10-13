@@ -1,28 +1,27 @@
 package com;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/move")
-public class PokemonMoveServlet extends HttpServlet implements AbstractServletInterface
+public class PokemonMoveServlet extends HttpServlet
 {
-
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		addHtmlAndBodyTags(response);
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		String name = request.getParameter("pokeName");
 		String type = request.getParameter("pokeType");
 //		String move = request.getParameter("pokeMove");
 
+		out.println("<!DOCTYPE html>");
+		out.println("<html><body>");
 		out.println("<h1>Formulier Demo</h1>");
 
 		out.println("<h2>Vul Move in</h2>");
@@ -34,18 +33,21 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 		out.println("  <button type='submit'>Verzenden (GET)</button>");
 
 		out.println("</form>");
-		closeHtmlAndBodyTags(response);
+
+		out.println("</body></html>");
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		addHtmlAndBodyTags(response);
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		String name = request.getParameter("name");
 
+		out.println("<!DOCTYPE html>");
+		out.println("<html><body>");
 		out.println("<h1>Formulier Demo</h1>");
 
 		out.println("<h2>Placeholder h2</h2>");
@@ -54,7 +56,7 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 		out.println("  <button type='submit'>Verzenden (POST)</button>");
 
 		out.println("</form>");
-		closeHtmlAndBodyTags(response);
+		out.println("</body></html>");
 	}
 }
 
