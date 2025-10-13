@@ -9,11 +9,13 @@ Devpro
 - JavaScript
 
 # Project architecture:
+```
 src/main/java/com/pokemonformulier/
 ├── PokemonNaamServlet.java
 ├── PokemonTypeServlet.java
 ├── PokemonMoveServlet.java
 └── PokemonPokedexNumberServlet.java
+```
 
 # Page flow:
 landing page = form1
