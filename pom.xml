@@ -31,6 +31,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.48.v20220622</version>
             </plugin>
+
         </plugins>
     </build>
 
