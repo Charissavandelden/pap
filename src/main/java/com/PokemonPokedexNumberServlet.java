@@ -31,7 +31,7 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 		out.println("  <label>Naam: <input type='hidden' name='pokeName' value=" + name +" ></label><br><br>");
 		out.println("  <label>Type: <input type='hidden' name='pokeType' value=" + type +" ></label><br><br>");
 		out.println("  <label>Move: <input type='text' name='pokeMove'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (GET)</button>");
+		out.println("  <button type='submit'>Verzenden (GET)</button >");
 
 		out.println("</form>");
 

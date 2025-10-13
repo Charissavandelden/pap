@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="pokedex">
+    <section class="left-panel">
+        <div class="header">
+            <div class="blue-light"></div>
+            <div class="small-lights">
+                <div class="light red"></div>
+                <div class="light yellow"></div>
+                <div class="light green"></div>
+            </div>
+        </div>
+
+        <input type="text" id="search-input" placeholder="Search Pokémon...">
+
+        <div class="pokemon-list-container">
+            <ul id="pokemon-list">
+            </ul>
+        </div>
+    </section>
+
+    <section class="right-panel">
+        <div class="display-screen">
+            <img id="pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pokémon Image">
+            <h2 id="pokemon-name">Pikachu</h2>
+            <p id="pokemon-id">#025</p>
+        </div>
+
+        <div class="details-screen">
+            <div id="pokemon-types" class="pokemon-types">
+                <span class="type-badge electric">Electric</span>
+            </div>
+            <div class="stats">
+                <div id="pokemon-height">Height: 0.4m</div>
+                <div id="pokemon-weight">Weight: 6.0kg</div>
+                <div id="pokemon-hp">HP: 35</div>
+                <div id="pokemon-attack">Attack: 55</div>
+                <div id="pokemon-defense">Defense: 40</div>
+                <div id="pokemon-speed">Speed: 90</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+</html>
