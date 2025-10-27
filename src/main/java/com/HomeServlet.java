@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet implements AbstractServletInterface
@@ -18,9 +19,14 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();
 
 		out.println("<h1>Homepage</h1>");
-
+		String username = (String) session.getAttribute("userName");
+		if (username != null)
+			out.println("<h2>Hallo " + username + "</h2>");
+		
 		out.println("<h2>Login:</h2>");
 		out.println("<form method='POST' action='/pokename'>");
 		out.println("  <label>Username: <input type='text' name='userName'></label><br>");

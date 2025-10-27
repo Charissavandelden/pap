@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.AbstractServletInterface;
 
-@WebServlet("/theme")
+@WebServlet("/theme-demo")
 public class ThemeServlet extends HttpServlet implements AbstractServletInterface
 {
 
