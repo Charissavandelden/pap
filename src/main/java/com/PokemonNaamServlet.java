@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/pokename")
 public class PokemonNaamServlet extends HttpServlet implements AbstractServletInterface
@@ -17,15 +18,17 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
+
+		HttpSession session = request.getSession();
+
 		PrintWriter out = response.getWriter();
 
 		out.println("<h1>Formulier Demo</h1>");
 
 		out.println("<h2>Pokemon naam</h2>");
-		out.println("<form method='GET' action='/type'>");
+		out.println("<form method='POST' action='/pokename'>");
 		out.println("  <label>Naam: <input type='text' name='pokeName'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (GET)</button>");
-
+		out.println("  <button type='submit'>Verzenden</button>");
 		out.println("</form>");
 		closeHtmlAndBodyTags(response);
 	}
@@ -34,20 +37,12 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		addHtmlAndBodyTags(response);
-		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 
-		String name = request.getParameter("name");
+		String pokeName = request.getParameter("pokeName");
+		session.setAttribute("pokeName", pokeName);
 
-		out.println("<h1>Formulier Demo</h1>");
-
-		out.println("<h2>Placeholder h2</h2>");
-		out.println("<form method='POST' action='/pokename'>");
-		out.println("  <label>Naam: <input type='text' name='pokemonNaam'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (POST)</button>");
-
-		out.println("</form>");
-		closeHtmlAndBodyTags(response);
+		response.sendRedirect("/move");
 	}
 }
 

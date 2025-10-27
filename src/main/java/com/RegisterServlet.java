@@ -19,7 +19,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
-		
+
 		HttpSession session = request.getSession(true);
 
 		out.println("<h1>Register</h1>");
@@ -39,13 +39,12 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		
+
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		session.setAttribute("userName", userName);
 		session.setAttribute("password", password);
-		
+
 		response.sendRedirect("/home");
 	}
 }
-

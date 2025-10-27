@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/move")
 public class PokemonMoveServlet extends HttpServlet implements AbstractServletInterface
@@ -18,6 +19,13 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
+
+		HttpSession session = request.getSession();
+
+		out.println("<h1>move pagina</h1>");
+		String pokeName = (String) session.getAttribute("pokeName");
+		if (pokeName != null)
+			out.println("<h2>Hallo " + pokeName + "</h2>");
 
 		String name = request.getParameter("pokeName");
 		String type = request.getParameter("pokeType");

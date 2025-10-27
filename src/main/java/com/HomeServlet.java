@@ -19,16 +19,16 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
-		
+
 		HttpSession session = request.getSession();
 
 		out.println("<h1>Homepage</h1>");
 		String username = (String) session.getAttribute("userName");
 		if (username != null)
 			out.println("<h2>Hallo " + username + "</h2>");
-		
+
 		out.println("<h2>Login:</h2>");
-		out.println("<form method='POST' action='/pokename'>");
+		out.println("<form method='POST' action='/home'>");
 		out.println("  <label>Username: <input type='text' name='userName'></label><br>");
 		out.println("  <label>Password: <input type='password' name='password'></label><br>");
 		out.println("  <button type='submit'>Verzenden</button>");
@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	{
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		
+
 		response.sendRedirect("/pokename");
 	}
 }
