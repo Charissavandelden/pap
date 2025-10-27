@@ -10,7 +10,7 @@ public interface AbstractServletInterface {
 	default void addHtmlAndBodyTags(HttpServletResponse response) throws IOException
 	{
         response.setContentType("text/html");
-        response.setCharacterEncoding("charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html");
