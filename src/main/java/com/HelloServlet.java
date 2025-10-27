@@ -11,13 +11,13 @@ import java.io.PrintWriter;
 public class HelloServlet extends HttpServlet
 {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-
-		response.setContentType("text/html");
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		out.println("<!DOCTYPE html>");
@@ -33,9 +33,6 @@ public class HelloServlet extends HttpServlet
 		out.println("</form>");
 
 		out.println("<hr>");
-
-
-		// Debug
 	}
 }
 
