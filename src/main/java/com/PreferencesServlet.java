@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/preferences")
-public class PreferenceServlet extends HttpServlet implements AbstractServletInterface
+public class PreferencesServlet extends HttpServlet implements AbstractServletInterface
 {
 
     private static final long serialVersionUID = 1L;
@@ -20,18 +20,18 @@ public class PreferenceServlet extends HttpServlet implements AbstractServletInt
           HttpServletResponse response)
           throws IOException
     {
-
-       // TODO: Lees "theme" cookie
-       String currentTheme = "light"; // default
-       String currentLocale = "EN"; //default
+       //Default values
+       String currentTheme = "light";
+       String currentLanguage = "EN";
+       
        Cookie[] cookies = request.getCookies();
        if (cookies != null) {
           for (Cookie cookie : cookies) {
              if (cookie.getName().equals("theme")) {
                 currentTheme = cookie.getValue();
              }
-             else if (cookie.getName().equals("locale")) {
-                currentLocale = cookie.getValue();
+             else if (cookie.getName().equals("language")) {
+                currentLanguage = cookie.getValue();
              }
           }
        }
@@ -53,23 +53,27 @@ public class PreferenceServlet extends HttpServlet implements AbstractServletInt
        out.println("  </style>");
        out.println("</head>");
        out.println("<body>");
-       out.println("<h1>Theme Switcher</h1>");
-       out.println("<h2>Current theme: " + currentTheme + "</h2>");
+       out.println("<h1>Preferences</h1>");
+       out.println("Current theme: " + currentTheme + "<br>");
+       out.println("Current language: " + currentLanguage + "<br>");
+       out.println("<br>");
        out.println("<form method='POST' action='/preferences'>");
-       out.println("  <label>");
+       out.println("  <label>Theme: ");
        out.println("    <input type='radio' name='theme' value='light' " +
           (currentTheme.equals("light") ? "checked" : "") + "> Light");
-       out.println("  </label>");
-       out.println("  <label>");
        out.println("    <input type='radio' name='theme' value='dark' " +
           (currentTheme.equals("dark") ? "checked" : "") + "> Dark");
        out.println("  </label>");
-       out.println("  <label>Locale: ");
-       out.println("    <input type='text' name='locale' value='" + currentLocale + "' />");
+       out.println("  <label for='language'>Language: ");
+       out.println("    <select name='language'>");
+       out.println("      <option value='EN'>English</option>");
+       out.println("      <option value='NL'>Nederlands</option>");
+       out.println("    </select>");
        out.println("  </label>");
        out.println("  <button type='submit'>Save preferences</button>");
        out.println("</form>");
        out.println("<hr>");
+       out.println("<button onclick=\"location.href='/home'\">Home</button>");
        out.println("</body></html>");
     }
 
@@ -78,22 +82,20 @@ public class PreferenceServlet extends HttpServlet implements AbstractServletInt
           HttpServletResponse response)
           throws IOException {
 
-       // TODO: Lees nieuwe theme uit form
        String newTheme = request.getParameter("theme");
-       String newLocale = request.getParameter("locale");
+       String newlanguage = request.getParameter("language");
 
-       // TODO: Maak cookie en zet deze
        Cookie themeCookie = new Cookie("theme", newTheme);
        themeCookie.setMaxAge(86400); // 24 uur
        themeCookie.setPath("/");
        themeCookie.setHttpOnly(true);
        response.addCookie(themeCookie);
        
-       Cookie localeCookie = new Cookie("locale", newLocale);
-       localeCookie.setMaxAge(86400); // 24 uur
-       localeCookie.setPath("/");
-       localeCookie.setHttpOnly(true);
-       response.addCookie(localeCookie);
+       Cookie languageCookie = new Cookie("language", newlanguage);
+       languageCookie.setMaxAge(86400); // 24 uur
+       languageCookie.setPath("/");
+       languageCookie.setHttpOnly(true);
+       response.addCookie(languageCookie);
 
        // TODO: Redirect terug naar GET
        response.sendRedirect("/preferences");
