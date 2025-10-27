@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface AbstractServletInterface {
 
-	default void addHtmlAndBodyTags(HttpServletResponse response) throws IOException
+	default HttpServletResponse addHtmlAndBodyTags(HttpServletResponse response) throws IOException
 	{
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
@@ -15,11 +15,14 @@ public interface AbstractServletInterface {
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html");
         out.println("<html><body>");
+        
+        return response;
 	}
 	
-	default void closeHtmlAndBodyTags(HttpServletResponse response) throws IOException
+	default HttpServletResponse closeHtmlAndBodyTags(HttpServletResponse response) throws IOException
 	{
 		response.getWriter().println("</body></html>");
+		return response;
 	}
 	
 }

@@ -21,13 +21,12 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 
 		String name = request.getParameter("pokeName");
 		String type = request.getParameter("pokeType");
-//		String move = request.getParameter("pokeMove");
 
 		out.println("<h1>Formulier Demo</h1>");
 
 		out.println("<h2>Vul Move in</h2>");
 		out.println("<label> " + name + type + " </label>");
-		out.println("<form method='GET' action='/move'>");
+		out.println("<form method='GET' action='/pokedex'>");
 		out.println("  <label>Naam: <input type='text' name='pokeName' value=" + name +" ></label><br><br>");
 		out.println("  <label>Type: <input type='text' name='pokeType' value=" + type +" ></label><br><br>");
 		out.println("  <label>Move: <input type='text' name='pokeMove'></label><br><br>");
