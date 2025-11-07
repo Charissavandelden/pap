@@ -23,7 +23,7 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        //Default values
        String currentTheme = "light";
        String currentLanguage = "EN";
-       
+
        Cookie[] cookies = request.getCookies();
        if (cookies != null) {
           for (Cookie cookie : cookies) {
@@ -36,7 +36,8 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
           }
        }
 
-       response.setContentType("text/html; charset=UTF-8");
+       response.setContentType("text/html");
+       response.setCharacterEncoding("UTF-8");
        PrintWriter out = response.getWriter();
 
        // Theme-based styling
@@ -73,7 +74,7 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        out.println("  <button type='submit'>Save preferences</button>");
        out.println("</form>");
        out.println("<hr>");
-       out.println("<button onclick=\"location.href='/home'\">Home</button>");
+       out.println("<button onclick=\"location.href='/welcome'\">Home</button>");
        out.println("</body></html>");
     }
 
@@ -90,7 +91,7 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        themeCookie.setPath("/");
        themeCookie.setHttpOnly(true);
        response.addCookie(themeCookie);
-       
+
        Cookie languageCookie = new Cookie("language", newlanguage);
        languageCookie.setMaxAge(86400); // 24 uur
        languageCookie.setPath("/");

@@ -1,13 +1,12 @@
 package com;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet implements AbstractServletInterface
@@ -20,60 +19,19 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 
-		out.println("<link rel='stylesheet' type='text/css' href='/pokestyle.css'>");
+		out.println("<h1>Homepage pokedex</h1>");
 
-		out.println("<h1 class='pokedex-header'>Homepage</h1>");
-		String username = (String) session.getAttribute("userName");
-		if (username != null)
-			out.println("<h2 class='pokedex-header'>Hello trainer " + username + "</h2>");
+		out.println("<h2>Login or Register:</h2>");
+		out.println("<form method='POST' action='/home'>");
+		out.println("  <label>Username: <input type='text' name='name'></label><br>");
+		out.println("  <label>Password: <input type='password' name='password'></label><br><br>");
 
-		// Show pokedex with static pokemon
-		out.println("<div class='pokedex-container'>");
-		out.println("  <h2 class='pokedex-header'>My Pokedex</h2>");
+		out.println("  <button type='submit' name='action' value='login'>Login</button>");
+		out.println("  <button type='submit' name='action' value='register'>Register</button>");
 
-		// Pokemon
-		out.println("  <div class='pokemon-card'>");
-		out.println("    <h3>Pikachu</h3>");
-		out.println("    <div class='pokemon-info'>");
-
-		// Left screen
-		out.println("      <div class='pokemon-screen'>");
-		out.println("        <div class='pokemon-field'>");
-		out.println("          <span class='pokemon-label'>Name:</span>");
-		out.println("          <span class='pokemon-value'>Pikachu</span>");
-		out.println("        </div>");
-		out.println("        <div class='pokemon-field'>");
-		out.println("          <span class='pokemon-label'>Type:</span>");
-		out.println("          <span class='pokemon-value type-electric'>Electric</span>");
-		out.println("        </div>");
-		out.println("      </div>");
-
-		// Right screen
-		out.println("      <div class='pokemon-screen'>");
-		out.println("        <div class='pokemon-field'>");
-		out.println("          <span class='pokemon-label'>Pokedex Number:</span>");
-		out.println("          <span class='pokemon-value'>025</span>");
-		out.println("        </div>");
-		out.println("        <div class='pokemon-field'>");
-		out.println("          <span class='pokemon-label'>Favorite Move:</span>");
-		out.println("          <span class='pokemon-value'>Thunder Bolt</span>");
-		out.println("        </div>");
-		out.println("      </div>");
-
-		out.println("    </div>");
-		out.println("  </div>");
-
-		out.println("</div>");
-
-		out.println("<div class='registration-section'>");
-		out.println("  <h2>Go to pokemon registration:</h2>");
-		out.println("  <form method='POST' action='/home'>");
-		out.println("    <button type='submit'>Verzenden</button>");
-		out.println("  </form>");
-		out.println("</div>");
-
+		out.println("</form>");
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -81,8 +39,19 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
+		HttpSession session = request.getSession();
+		String action = request.getParameter("action");
 
-		response.sendRedirect("/pokename");
+		if ("register".equals(action))
+			response.sendRedirect("/register");
+		else {
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+
+			session.setAttribute("name", name);
+			session.setAttribute("password", password);
+
+			response.sendRedirect("/welcome");
+		}
 	}
 }
-

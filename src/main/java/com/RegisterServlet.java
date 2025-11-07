@@ -45,6 +45,6 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		session.setAttribute("userName", userName);
 		session.setAttribute("password", password);
 
-		response.sendRedirect("/home");
+		response.sendRedirect("/welcome");
 	}
 }
