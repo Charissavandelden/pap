@@ -11,18 +11,18 @@ public interface AbstractServletInterface {
 	{
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        
+
         PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html");
+        out.println("<!DOCTYPE html>");
         out.println("<html><body>");
-        
+
         return response;
 	}
-	
+
 	default HttpServletResponse closeHtmlAndBodyTags(HttpServletResponse response) throws IOException
 	{
 		response.getWriter().println("</body></html>");
 		return response;
 	}
-	
+
 }
