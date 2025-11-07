@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -14,23 +15,23 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException
-	{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
-		out.println("<h1>Formulier Demo</h1>");
 
-		// GET Form - data komt in URL
-		out.println("<h2>1. GET Form (data in URL)</h2>");
-		out.println("<form method='GET' action='/form'>");
-		out.println("  <label>Naam: <input type='text' name='name'></label><br><br>");
-		out.println("  <label>Email: <input type='email' name='email'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (GET)</button>");
+		HttpSession session = request.getSession(true);
+
+		out.println("<h1>Homepage pokedex</h1>");
+
+		out.println("<h2>Login or Register:</h2>");
+		out.println("<form method='POST' action='/home'>");
+		out.println("  <label>Username: <input type='text' name='name'></label><br>");
+		out.println("  <label>Password: <input type='password' name='password'></label><br><br>");
+
+		out.println("  <button type='submit' name='action' value='login'>Login</button>");
+		out.println("  <button type='submit' name='action' value='register'>Register</button>");
+
 		out.println("</form>");
-
-		out.println("<hr>");
-
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -38,7 +39,19 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		// Simple form processing demo
-		response.sendRedirect("/home");
+		HttpSession session = request.getSession();
+		String action = request.getParameter("action");
+
+		if ("register".equals(action))
+			response.sendRedirect("/register");
+		else {
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+
+			session.setAttribute("name", name);
+			session.setAttribute("password", password);
+
+			response.sendRedirect("/welcome");
+		}
 	}
 }

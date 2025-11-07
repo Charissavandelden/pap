@@ -81,7 +81,6 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-
 		response.sendRedirect("/pokename");
 	}
 }
