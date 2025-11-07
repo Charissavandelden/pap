@@ -22,18 +22,58 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 
 		HttpSession session = request.getSession();
 
-		out.println("<h1>Homepage</h1>");
+		out.println("<link rel='stylesheet' type='text/css' href='/pokestyle.css'>");
+
+		out.println("<h1 class='pokedex-header'>Homepage</h1>");
 		String username = (String) session.getAttribute("userName");
 		if (username != null)
-			out.println("<h2>Hallo " + username + "</h2>");
+			out.println("<h2 class='pokedex-header'>Hello trainer " + username + "</h2>");
 
-		out.println("<h2>Login:</h2>");
-		out.println("<form method='POST' action='/home'>");
-		out.println("  <label>Username: <input type='text' name='userName'></label><br>");
-		out.println("  <label>Password: <input type='password' name='password'></label><br>");
-		out.println("  <button type='submit'>Verzenden</button>");
+		// Show pokedex with static pokemon
+		out.println("<div class='pokedex-container'>");
+		out.println("  <h2 class='pokedex-header'>My Pokedex</h2>");
 
-		out.println("</form>");
+		// Pokemon
+		out.println("  <div class='pokemon-card'>");
+		out.println("    <h3>Pikachu</h3>");
+		out.println("    <div class='pokemon-info'>");
+
+		// Left screen
+		out.println("      <div class='pokemon-screen'>");
+		out.println("        <div class='pokemon-field'>");
+		out.println("          <span class='pokemon-label'>Name:</span>");
+		out.println("          <span class='pokemon-value'>Pikachu</span>");
+		out.println("        </div>");
+		out.println("        <div class='pokemon-field'>");
+		out.println("          <span class='pokemon-label'>Type:</span>");
+		out.println("          <span class='pokemon-value type-electric'>Electric</span>");
+		out.println("        </div>");
+		out.println("      </div>");
+
+		// Right screen
+		out.println("      <div class='pokemon-screen'>");
+		out.println("        <div class='pokemon-field'>");
+		out.println("          <span class='pokemon-label'>Pokedex Number:</span>");
+		out.println("          <span class='pokemon-value'>025</span>");
+		out.println("        </div>");
+		out.println("        <div class='pokemon-field'>");
+		out.println("          <span class='pokemon-label'>Favorite Move:</span>");
+		out.println("          <span class='pokemon-value'>Thunder Bolt</span>");
+		out.println("        </div>");
+		out.println("      </div>");
+
+		out.println("    </div>");
+		out.println("  </div>");
+
+		out.println("</div>");
+
+		out.println("<div class='registration-section'>");
+		out.println("  <h2>Go to pokemon registration:</h2>");
+		out.println("  <form method='POST' action='/home'>");
+		out.println("    <button type='submit'>Verzenden</button>");
+		out.println("  </form>");
+		out.println("</div>");
+
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -41,8 +81,6 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		String userName = request.getParameter("userName");
-		String password = request.getParameter("password");
 
 		response.sendRedirect("/pokename");
 	}
