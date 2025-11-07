@@ -18,18 +18,20 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
+		addPokemonStyling(response);
 
 		HttpSession session = request.getSession();
 
 		PrintWriter out = response.getWriter();
 
-		out.println("<h1>Formulier Demo</h1>");
-
-		out.println("<h2>Pokemon naam</h2>");
+		out.println("<div class='pokemon-container'>");
+		out.println("<h1>New pokemon entree</h1>");
+		out.println("<h2>Name</h2>");
 		out.println("<form method='POST' action='/pokename'>");
 		out.println("  <label>Naam: <input type='text' name='pokeName'></label><br><br>");
 		out.println("  <button type='submit'>Verzenden</button>");
 		out.println("</form>");
+		out.println("</div>");
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -42,7 +44,7 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 		String pokeName = request.getParameter("pokeName");
 		session.setAttribute("pokeName", pokeName);
 
-		response.sendRedirect("/move");
+		response.sendRedirect("/type");
 	}
 }
 

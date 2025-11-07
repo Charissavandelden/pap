@@ -18,29 +18,23 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
+		addPokemonStyling(response);
 		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
-
-		out.println("<h1>move pagina</h1>");
 		String pokeName = (String) session.getAttribute("pokeName");
-		if (pokeName != null)
-			out.println("<h2>Hallo " + pokeName + "</h2>");
+		String pokeType = (String) session.getAttribute("pokeType");
 
-		String name = request.getParameter("pokeName");
-		String type = request.getParameter("pokeType");
+		out.println("<div class='pokemon-container'>");
+		out.println("<h1>Move Pagina</h1>");
+		out.println("<h2>Choose move for " + pokeName + " (" + pokeType + ")</h2>");
 
-		out.println("<h1>Formulier Demo</h1>");
-
-		out.println("<h2>Vul Move in</h2>");
-		out.println("<label> " + name + type + " </label>");
-		out.println("<form method='GET' action='/pokedex'>");
-		out.println("  <label>Naam: <input type='text' name='pokeName' value=" + name +" ></label><br><br>");
-		out.println("  <label>Type: <input type='text' name='pokeType' value=" + type +" ></label><br><br>");
-		out.println("  <label>Move: <input type='text' name='pokeMove'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (GET)</button>");
+		out.println("<form method='POST' action='/move'>");
+		out.println("<label>Move: <input type='text' name='pokeMove'></label><br><br>");
+		out.println("<button type='submit'>Next</button>");
 
 		out.println("</form>");
+		out.println("</div>");
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -48,20 +42,12 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		addHtmlAndBodyTags(response);
-		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 
-		String name = request.getParameter("name");
+		String pokeMove = request.getParameter("pokeMove");
+		session.setAttribute("pokeMove", pokeMove);
 
-		out.println("<h1>Formulier Demo</h1>");
-
-		out.println("<h2>Placeholder h2</h2>");
-		out.println("<form method='POST' action='/pokename'>");
-		out.println("  <label>Naam: <input type='text' name='pokemonNaam'></label><br><br>");
-		out.println("  <button type='submit'>Verzenden (POST)</button>");
-
-		out.println("</form>");
-		closeHtmlAndBodyTags(response);
+		response.sendRedirect("/pokedex");
 	}
 }
 

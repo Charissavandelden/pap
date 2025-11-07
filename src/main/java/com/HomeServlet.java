@@ -17,11 +17,14 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
+		addPokemonStyling(response);
 		PrintWriter out = response.getWriter();
+
 
 		HttpSession session = request.getSession(true);
 
-		out.println("<h1>Homepage pokedex</h1>");
+		out.println("<div class='pokemon-container'>");
+		out.println("<h1>Pokemon Login</h1>");
 
 		out.println("<h2>Login or Register:</h2>");
 		out.println("<form method='POST' action='/home'>");
@@ -32,6 +35,7 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  <button type='submit' name='action' value='register'>Register</button>");
 
 		out.println("</form>");
+		out.println("</div>");
 		closeHtmlAndBodyTags(response);
 	}
 
