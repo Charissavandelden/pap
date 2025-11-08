@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 
 		out.println("<h2>Login or register:</h2>");
 		out.println("<form method='POST' action='/register'>");
-		out.println("  <label>Username: <input type='text' name='username' required></label>");
+		out.println("  <label>Username: <input type='text' name='username' required autofocus></label>");
 		out.println("  <label>Password: <input type='password' name='password' required></label><br>");
 		
 		out.println("  <button type='submit' name='action' value='login'>Login</button>");
