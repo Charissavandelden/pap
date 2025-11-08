@@ -32,7 +32,7 @@ public class PokemonTypeServlet extends HttpServlet implements AbstractServletIn
 
 		out.println("<h2>Choose type for " + registeringPokemon.getName() + "</h2>");
 		out.println("<form method='POST' action='/pokemon/type'>");
-		out.println("  <label>Type: <input type='text' name='pokeType' value='" + registeringPokemon.getType() + "' required autofocus></label><br><br>");
+		out.println("  <label>Type: <input type='text' name='pokeType' value='" + registeringPokemon.getType() + "' required autofocus></label>");
 		out.println("  <button type='submit'>Next</button>");
 
 		out.println("</form>");

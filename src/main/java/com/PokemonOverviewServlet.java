@@ -29,10 +29,10 @@ public class PokemonOverviewServlet extends HttpServlet implements AbstractServl
 
 		out.println("<div class='pokemon-container'>");
 		out.println("<h2>Pokemon Overview:</h2>");
-		out.println("  <label>Name: " + registeringPokemon.getName() + " </label><br>");
-		out.println("  <label>Type: " + registeringPokemon.getType() + " </label><br>");
-		out.println("  <label>Move: " + registeringPokemon.getMove() + " </label><br>");
-		out.println("  <label>Pokedex number: " + registeringPokemon.getPokedexNumber() + " </label><br>");
+		out.println("  <label>Name: " + registeringPokemon.getName() + " </label>");
+		out.println("  <label>Type: " + registeringPokemon.getType() + " </label>");
+		out.println("  <label>Move: " + registeringPokemon.getMove() + " </label>");
+		out.println("  <label>Pokedex number: " + registeringPokemon.getPokedexNumber() + " </label>");
 
 		out.println("<h2>Is this correct?</h2>");
 		out.println("<form method='POST' action='/pokemon/overview'>");

@@ -32,7 +32,7 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 		out.println("<h2>Choose move for " + registeringPokemon.getName() + " (" + registeringPokemon.getType() + ")</h2>");
 
 		out.println("<form method='POST' action='/pokemon/move'>");
-		out.println("<label>Move: <input type='text' name='pokeMove' value='" + registeringPokemon.getMove() + "' required autofocus></label><br><br>");
+		out.println("<label>Move: <input type='text' name='pokeMove' value='" + registeringPokemon.getMove() + "' required autofocus></label>");
 		out.println("<button type='submit'>Next</button>");
 
 		out.println("</form>");

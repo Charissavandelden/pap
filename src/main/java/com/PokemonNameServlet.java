@@ -30,9 +30,9 @@ public class PokemonNameServlet extends HttpServlet implements AbstractServletIn
 		
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>New pokemon entry</h1>");
-		out.println("<h2>Name</h2>");
+		out.println("<h2>Choose a name:</h2>");
 		out.println("<form method='POST' action='/pokemon/name'>");
-		out.println("  <label>Naam: <input type='text' name='pokeName' value='" + registeringPokemon.getName() + "' required autofocus></label><br><br>");
+		out.println("  <label>Naam: <input type='text' name='pokeName' value='" + registeringPokemon.getName() + "' required autofocus></label>");
 		out.println("  <button type='submit'>Next</button>");
 		out.println("</form>");
 		out.println("</div>");
