@@ -31,9 +31,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 		if (username != null)
 			out.println("<h2 class='pokedex-header'>Hello " + username + "!</h2>");
 		
-		Pokemon pokemon = (Pokemon) session.getAttribute("pokemon");
-		if (pokemon == null)
-			pokemon = createPikachu();
+		Pokemon pokemon = getPokemon(session);
 
 		// Show pokedex with static pokemon
 		out.println("<div class='pokedex-container'>");
@@ -87,7 +85,16 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException
 	{
-		response.sendRedirect("/pokename");
+		response.sendRedirect("/pokemon/name");
+	}
+	
+	private Pokemon getPokemon(HttpSession session)
+	{
+		Pokemon pokemon = (Pokemon) session.getAttribute("pokemon");
+		//Create pikachu if there is no registered pokemon in the session
+		if (pokemon == null)
+			pokemon = createPikachu();
+		return pokemon;
 	}
 	
 	private Pokemon createPikachu()

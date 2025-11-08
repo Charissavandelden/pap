@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import entities.Pokemon;
 
-@WebServlet("/pokename")
-public class PokemonNaamServlet extends HttpServlet implements AbstractServletInterface
+@WebServlet("/pokemon/name")
+public class PokemonNameServlet extends HttpServlet implements AbstractServletInterface
 {
 
 	private static final long serialVersionUID = 1L;
@@ -24,12 +24,15 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 		addPokemonStyling(response);
 
 		PrintWriter out = response.getWriter();
-
+		
+		HttpSession session = request.getSession();
+		Pokemon registeringPokemon = getRegisteringPokemon(session);
+		
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>New pokemon entry</h1>");
 		out.println("<h2>Name</h2>");
-		out.println("<form method='POST' action='/pokename'>");
-		out.println("  <label>Naam: <input type='text' name='pokeName'></label><br><br>");
+		out.println("<form method='POST' action='/pokemon/name'>");
+		out.println("  <label>Naam: <input type='text' name='pokeName' value='" + registeringPokemon.getName() + "'></label><br><br>");
 		out.println("  <button type='submit'>Next</button>");
 		out.println("</form>");
 		out.println("</div>");
@@ -41,13 +44,21 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		Pokemon registeringPokemon = new Pokemon();
+		Pokemon registeringPokemon = getRegisteringPokemon(session);
 
 		String pokeName = request.getParameter("pokeName");
 		registeringPokemon.setName(pokeName);
-		session.setAttribute("pokemon", registeringPokemon);
+		session.setAttribute("registeringPokemon", registeringPokemon);
 
-		response.sendRedirect("/type");
+		response.sendRedirect("/pokemon/type");
+	}
+	
+	private Pokemon getRegisteringPokemon(HttpSession session)
+	{
+		Pokemon registeringPokemon  = (Pokemon) session.getAttribute("registeringPokemon");
+		if (registeringPokemon == null)
+			registeringPokemon = new Pokemon();
+		return registeringPokemon;
 	}
 }
 

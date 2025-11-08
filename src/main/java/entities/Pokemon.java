@@ -2,13 +2,13 @@ package entities;
 
 public class Pokemon {
 
-	private String name;
+	private String name = "";
 	
-	private String type;
+	private String type = "";
 	
-	private String move;
+	private String move = "";
 	
-	private int pokedexNumber;
+	private int pokedexNumber = 0;
 	
 	public String getName() {
 		return name;

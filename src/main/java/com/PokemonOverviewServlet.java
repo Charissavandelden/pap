@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import entities.Pokemon;
 
-@WebServlet("/pokemon/move")
-public class PokemonMoveServlet extends HttpServlet implements AbstractServletInterface
+@WebServlet("/pokemon/overview")
+public class PokemonOverviewServlet extends HttpServlet implements AbstractServletInterface
 {
 
 	private static final long serialVersionUID = 1L;
@@ -28,15 +28,20 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 		Pokemon registeringPokemon = getRegisteringPokemon(session);
 
 		out.println("<div class='pokemon-container'>");
-		out.println("<h1>Move Pagina</h1>");
-		out.println("<h2>Choose move for " + registeringPokemon.getName() + " (" + registeringPokemon.getType() + ")</h2>");
+		out.println("<h2>Pokemon Overview:</h2>");
+		out.println("  <label>Name: " + registeringPokemon.getName() + " </label><br>");
+		out.println("  <label>Type: " + registeringPokemon.getType() + " </label><br>");
+		out.println("  <label>Move: " + registeringPokemon.getMove() + " </label><br>");
+		out.println("  <label>Pokedex number: " + registeringPokemon.getPokedexNumber() + " </label><br>");
 
-		out.println("<form method='POST' action='/pokemon/move'>");
-		out.println("<label>Move: <input type='text' name='pokeMove' value='" + registeringPokemon.getMove() + "'></label><br><br>");
-		out.println("<button type='submit'>Next</button>");
+		out.println("<h2>Is this correct?</h2>");
+		out.println("<form method='POST' action='/pokemon/overview'>");
+		out.println("  <button type='submit' name='action' value='complete'>Complete Pokemon</button>");
+		out.println("  <button type='submit' name='action' value='edit'>Edit Pokemon</button>");
 
 		out.println("</form>");
 		out.println("</div>");
+
 		closeHtmlAndBodyTags(response);
 	}
 
@@ -45,12 +50,15 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		
-		Pokemon registeringPokemon = getRegisteringPokemon(session);
-		registeringPokemon.setMove(request.getParameter("pokeMove"));
-		session.setAttribute("registeringPokemon", registeringPokemon);
-
-		response.sendRedirect("/pokemon/pokedex");
+		String action = request.getParameter("action");
+		if(action.equals("complete"))
+		{
+			session.setAttribute("pokemon", getRegisteringPokemon(session));
+			session.setAttribute("registeringPokemon", null);
+			response.sendRedirect("/welcome");
+		}
+		else
+			response.sendRedirect("/pokemon/name");
 	}
 	
 	private Pokemon getRegisteringPokemon(HttpSession session)
