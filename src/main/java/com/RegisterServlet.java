@@ -2,9 +2,6 @@ package com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +36,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
             out.println("<p style='color:green'>Registration successful!</p>");
         
 		if (request.getParameter("error") != null) {
-			String decodedError = decode(request.getParameter("error").toString());
+			String decodedError = decodeString(request.getParameter("error").toString());
 			out.println("<p style='color:red'>" + decodedError + "</p>");
 		}
 
@@ -67,7 +64,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		if ("register".equals(action))
 		{
 			if(USERS.containsKey(username))
-				response.sendRedirect("/register?error=" + encode("Username is taken"));
+				response.sendRedirect("/register?error=" + encodeString("Username is taken"));
 			else
 			{
 				USERS.put(username, password);
@@ -77,23 +74,13 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		else
 		{
 			if(!USERS.containsKey(username) || !USERS.get(username).equals(password))
-				response.sendRedirect("/register?error=" + encode("Invalid credentials!"));
+				response.sendRedirect("/register?error=" + encodeString("Invalid credentials!"));
 			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", username);
 
 			response.sendRedirect("/welcome");
 		}
-	}
-	
-	private String encode(String message)
-	{
-		return URLEncoder.encode(message, StandardCharsets.UTF_8);
-	}
-	
-	private String decode(String message)
-	{
-		return URLDecoder.decode(message, StandardCharsets.UTF_8);
 	}
 	
 	private static HashMap<String, String> bootstrapHardcodedUsers()

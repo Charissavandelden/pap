@@ -17,6 +17,7 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
 		addPokemonStyling(response);
 		PrintWriter out = response.getWriter();

@@ -17,6 +17,7 @@ public class PokemonNaamServlet extends HttpServlet implements AbstractServletIn
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
 		addPokemonStyling(response);
 

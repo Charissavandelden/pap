@@ -17,6 +17,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
 		PrintWriter out = response.getWriter();
 
