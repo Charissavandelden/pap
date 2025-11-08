@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.Pokemon;
+
 @WebServlet("/type")
 public class PokemonTypeServlet extends HttpServlet implements AbstractServletInterface
 {
@@ -23,12 +25,12 @@ public class PokemonTypeServlet extends HttpServlet implements AbstractServletIn
 		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
-		String pokeName = (String) session.getAttribute("pokeName");
+		Pokemon registeringPokemon = getPokemon(session);
 
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>Pokemon Type</h1>");
 
-		out.println("<h2>Choose type for " + pokeName + "</h2>");
+		out.println("<h2>Choose type for " + registeringPokemon.getName() + "</h2>");
 		out.println("<form method='POST' action='/type'>");
 		out.println("  <label>Type: <input type='text' name='pokeType'></label><br><br>");
 		out.println("  <button type='submit'>Next</button>");
@@ -45,10 +47,16 @@ public class PokemonTypeServlet extends HttpServlet implements AbstractServletIn
 	{
 		HttpSession session = request.getSession();
 
-		String pokeType = request.getParameter("pokeType");
-		session.setAttribute("pokeType", pokeType);
+		Pokemon registeringPokemon = getPokemon(session);
+		registeringPokemon.setType(request.getParameter("pokeType"));
+		session.setAttribute("pokemon", registeringPokemon);
 
 		response.sendRedirect("/move");
+	}
+	
+	private Pokemon getPokemon(HttpSession session)
+	{
+		return (Pokemon) session.getAttribute("pokemon");
 	}
 }
 
