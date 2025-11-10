@@ -6,9 +6,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public interface AbstractServletInterface {
 
@@ -72,9 +73,9 @@ public interface AbstractServletInterface {
 
 		// Read theme from cookies
 		String currentTheme = "light";
-		javax.servlet.http.Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
-			for (javax.servlet.http.Cookie cookie : cookies) {
+			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("theme")) {
 					currentTheme = cookie.getValue();
 					break;
@@ -110,9 +111,9 @@ public interface AbstractServletInterface {
 
 		// Read theme from cookies
 		String currentTheme = "light";
-		javax.servlet.http.Cookie[] cookies = request.getCookies();
+		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
-			for (javax.servlet.http.Cookie cookie : cookies) {
+			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("theme")) {
 					currentTheme = cookie.getValue();
 					break;

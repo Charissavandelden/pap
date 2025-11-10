@@ -1,10 +1,10 @@
 package com;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -19,7 +19,6 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 		addHtmlAndBodyTags(response);
 		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
-
 
 		HttpSession session = request.getSession(true);
 
