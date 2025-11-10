@@ -21,7 +21,7 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
-		addPokemonStyling(response);
+		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
@@ -46,14 +46,14 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		
+
 		Pokemon registeringPokemon = getRegisteringPokemon(session);
 		registeringPokemon.setPokedexNumber(Integer.parseInt(request.getParameter("pokeNumber")));
 		session.setAttribute("registeringPokemon", registeringPokemon);
-		
+
 		response.sendRedirect("/pokemon/overview");
 	}
-	
+
 	private Pokemon getRegisteringPokemon(HttpSession session)
 	{
 		return (Pokemon) session.getAttribute("registeringPokemon");

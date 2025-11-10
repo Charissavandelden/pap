@@ -17,7 +17,7 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
-		addPokemonStyling(response);
+		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
 
 

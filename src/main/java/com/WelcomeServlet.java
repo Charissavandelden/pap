@@ -21,6 +21,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
+		addThemedWelcomeStyling(response, request);
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(false);
 
@@ -30,7 +31,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 		String username = (String) session.getAttribute("username");
 		if (username != null)
 			out.println("<h2 class='pokedex-header'>Hello " + username + "!</h2>");
-		
+
 		Pokemon pokemon = getPokemon(session);
 
 		// Show pokedex with static pokemon
@@ -76,6 +77,8 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 		out.println("  <form method='POST' action='/welcome'>");
 		out.println("    <button type='submit'>Start</button>");
 		out.println("  </form>");
+		out.println("  <br>");
+		out.println("  <a href='/preferences'>⚙️ Theme Settings</a>");
 		out.println("</div>");
 
 		closeHtmlAndBodyTags(response);
@@ -87,7 +90,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 	{
 		response.sendRedirect("/pokemon/name");
 	}
-	
+
 	private Pokemon getPokemon(HttpSession session)
 	{
 		Pokemon pokemon = (Pokemon) session.getAttribute("pokemon");
@@ -96,7 +99,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 			pokemon = createPikachu();
 		return pokemon;
 	}
-	
+
 	private Pokemon createPikachu()
 	{
 		Pokemon pikachu = new Pokemon();
@@ -104,7 +107,7 @@ public class WelcomeServlet extends HttpServlet implements AbstractServletInterf
 		pikachu.setType("Electric");
 		pikachu.setMove("Thunder Bolt");
 		pikachu.setPokedexNumber(25);
-		
+
 		return pikachu;
 	}
 }

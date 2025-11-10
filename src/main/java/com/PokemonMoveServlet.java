@@ -21,7 +21,7 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		redirectIfNotLoggedIn(request, response);
 		addHtmlAndBodyTags(response);
-		addPokemonStyling(response);
+		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
@@ -45,14 +45,14 @@ public class PokemonMoveServlet extends HttpServlet implements AbstractServletIn
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		
+
 		Pokemon registeringPokemon = getRegisteringPokemon(session);
 		registeringPokemon.setMove(request.getParameter("pokeMove"));
 		session.setAttribute("registeringPokemon", registeringPokemon);
 
 		response.sendRedirect("/pokemon/pokedex");
 	}
-	
+
 	private Pokemon getRegisteringPokemon(HttpSession session)
 	{
 		return (Pokemon) session.getAttribute("registeringPokemon");

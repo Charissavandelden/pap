@@ -15,26 +15,26 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 {
 
 	private static final long serialVersionUID = 1L;
-	
+
     private static final HashMap<String, String> USERS = bootstrapHardcodedUsers();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		addHtmlAndBodyTags(response);
-		addPokemonStyling(response);
+		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession(false);
         // User is already logged in
         if (session != null && session.getAttribute("username") != null)
             response.sendRedirect("/welcome");
-        
+
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>Welcome trainer!</h1>");
-		
+
 		if (Boolean.parseBoolean(request.getParameter("success")))
             out.println("<p style='color:green'>Registration successful!</p>");
-        
+
 		if (request.getParameter("error") != null) {
 			String decodedError = decodeString(request.getParameter("error").toString());
 			out.println("<p style='color:red'>" + decodedError + "</p>");
@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		out.println("<form method='POST' action='/register'>");
 		out.println("  <label>Username: <input type='text' name='username' required autofocus></label>");
 		out.println("  <label>Password: <input type='password' name='password' required></label><br>");
-		
+
 		out.println("  <button type='submit' name='action' value='login'>Login</button>");
 		out.println("  <button type='submit' name='action' value='register'>Register</button>");
 
@@ -60,7 +60,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String action = request.getParameter("action");
-		
+
 		if ("register".equals(action))
 		{
 			if(USERS.containsKey(username))
@@ -75,14 +75,14 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 		{
 			if(!USERS.containsKey(username) || !USERS.get(username).equals(password))
 				response.sendRedirect("/register?error=" + encodeString("Invalid credentials!"));
-			
+
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", username);
 
 			response.sendRedirect("/welcome");
 		}
 	}
-	
+
 	private static HashMap<String, String> bootstrapHardcodedUsers()
 	{
 		HashMap<String, String> standardUsers = new HashMap<String, String>();
