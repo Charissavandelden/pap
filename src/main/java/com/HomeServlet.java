@@ -20,8 +20,6 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 		addThemedPokemonStyling(response, request);
 		PrintWriter out = response.getWriter();
 
-		HttpSession session = request.getSession(true);
-
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>Pokemon Login</h1>");
 
