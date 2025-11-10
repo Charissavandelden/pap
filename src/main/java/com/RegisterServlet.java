@@ -86,7 +86,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 	private static HashMap<String, String> bootstrapHardcodedUsers()
 	{
 		HashMap<String, String> standardUsers = new HashMap<String, String>();
-		standardUsers.put("gary", "lilbisch");
+		standardUsers.put("test", "test");
 		standardUsers.put("ash_ketchum", "verybest");
 		return standardUsers;
 	}
