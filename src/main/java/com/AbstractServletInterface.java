@@ -2,10 +2,33 @@ package com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public interface AbstractServletInterface {
+	
+	default void redirectIfNotLoggedIn(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		HttpSession session = request.getSession(false);
+		//Redirect to registration/login page if not (fully) logged in.
+		if (session == null || (session != null && session.getAttribute("username") == null))
+			response.sendRedirect("/register");
+	}
+	
+	default String encodeString(String message)
+	{
+		return URLEncoder.encode(message, StandardCharsets.UTF_8);
+	}
+	
+	default String decodeString(String message)
+	{
+		return URLDecoder.decode(message, StandardCharsets.UTF_8);
+	}
 
 	default HttpServletResponse addHtmlAndBodyTags(HttpServletResponse response) throws IOException
 	{

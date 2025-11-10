@@ -11,8 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import entities.Pokemon;
 
-@WebServlet("/pokemon/pokedex")
-public class PokemonPokedexNumberServlet extends HttpServlet implements AbstractServletInterface
+@WebServlet("/pokemon/overview")
+public class PokemonOverviewServlet extends HttpServlet implements AbstractServletInterface
 {
 
 	private static final long serialVersionUID = 1L;
@@ -28,12 +28,16 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 		Pokemon registeringPokemon = getRegisteringPokemon(session);
 
 		out.println("<div class='pokemon-container'>");
-		out.println("<h1>Pokedex Number</h1>");
+		out.println("<h2>Pokemon Overview:</h2>");
+		out.println("  <label>Name: " + registeringPokemon.getName() + " </label>");
+		out.println("  <label>Type: " + registeringPokemon.getType() + " </label>");
+		out.println("  <label>Move: " + registeringPokemon.getMove() + " </label>");
+		out.println("  <label>Pokedex number: " + registeringPokemon.getPokedexNumber() + " </label>");
 
-		out.println("<h2>Vul Pokedex number in</h2>");
-		out.println("<form method='POST' action='/pokemon/pokedex'>");
-		out.println("  <label>Number: <input type='number' name='pokeNumber' value='" + registeringPokemon.getPokedexNumber() + "' required autofocus></label>");
-		out.println("  <button type='submit'>Show overview</button>");
+		out.println("<h2>Is this correct?</h2>");
+		out.println("<form method='POST' action='/pokemon/overview'>");
+		out.println("  <button type='submit' name='action' value='complete'>Complete Pokemon</button>");
+		out.println("  <button type='submit' name='action' value='edit'>Edit Pokemon</button>");
 
 		out.println("</form>");
 		out.println("</div>");
@@ -46,12 +50,15 @@ public class PokemonPokedexNumberServlet extends HttpServlet implements Abstract
 			throws IOException
 	{
 		HttpSession session = request.getSession();
-		
-		Pokemon registeringPokemon = getRegisteringPokemon(session);
-		registeringPokemon.setPokedexNumber(Integer.parseInt(request.getParameter("pokeNumber")));
-		session.setAttribute("registeringPokemon", registeringPokemon);
-		
-		response.sendRedirect("/pokemon/overview");
+		String action = request.getParameter("action");
+		if(action.equals("complete"))
+		{
+			session.setAttribute("pokemon", getRegisteringPokemon(session));
+			session.setAttribute("registeringPokemon", null);
+			response.sendRedirect("/welcome");
+		}
+		else
+			response.sendRedirect("/pokemon/name");
 	}
 	
 	private Pokemon getRegisteringPokemon(HttpSession session)
