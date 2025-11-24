@@ -142,6 +142,7 @@
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
+    margin-top: 15px;
 }
 
 .registration-section button:hover {

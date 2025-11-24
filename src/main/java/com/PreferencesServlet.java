@@ -36,46 +36,70 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
           }
        }
 
-       response.setContentType("text/html");
-       response.setCharacterEncoding("UTF-8");
+       addHtmlAndBodyTags(response);
        PrintWriter out = response.getWriter();
 
-       // Theme-based styling
+       out.println("<link rel='stylesheet' type='text/css' href='/pokestyle.css'>");
+
+       // Theme-based styling for dynamic elements
        String bgColor = currentTheme.equals("dark") ? "#222" : "#fff";
        String textColor = currentTheme.equals("dark") ? "#fff" : "#000";
 
-       out.println("<!DOCTYPE html>");
-       out.println("<html>");
-       out.println("<head>");
-       out.println("  <style>");
-       out.println("    body { background-color: " + bgColor + "; color: " + textColor + "; font-family: Arial, sans-serif; padding: 20px; }");
-       out.println("    label { display: block; margin: 10px 0; }");
-       out.println("    button { margin-top: 15px; padding: 10px 20px; cursor: pointer; }");
-       out.println("  </style>");
-       out.println("</head>");
-       out.println("<body>");
-       out.println("<h1>Preferences</h1>");
-       out.println("Current theme: " + currentTheme + "<br>");
-       out.println("Current language: " + currentLanguage + "<br>");
-       out.println("<br>");
-       out.println("<form method='POST' action='/preferences'>");
-       out.println("  <label>Theme: ");
-       out.println("    <input type='radio' name='theme' value='light' " +
+       out.println("<style>");
+       out.println("  body { background-color: " + bgColor + " !important; color: " + textColor + " !important; }");
+       out.println("  .pokedex-container { background-color: " + bgColor + "; color: " + textColor + "; }");
+       out.println("  .pokemon-card { background-color: " + bgColor + "; color: " + textColor + "; }");
+	   	out.println("  .pokemon-field .pokemon-value { color: " + textColor + " !important; }");
+       out.println("  .pokemon-field .pokemon-label { color: " + textColor + " !important; }");
+       out.println("  .pokemon-screen .pokemon-value { color: " + textColor + " !important; }");
+       out.println("  .pokemon-screen .pokemon-label { color: " + textColor + " !important; }");
+       out.println("  .pokedex-header { color: " + textColor + " !important; }");
+       out.println("  .registration-section { background-color: " + bgColor + "; color: " + textColor + "; }");
+       out.println("  .form-label { color: " + textColor + " !important; }");
+       out.println("  .pokemon-field { background-color: " + (currentTheme.equals("dark") ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)") + " !important; }");
+       out.println("</style>");
+       out.println("<div class='pokedex-container'>");
+       out.println("  <h1 class='pokedex-header'>Preferences</h1>");
+       out.println("  <div class='pokemon-card'>");
+       out.println("    <div class='pokemon-info'>");
+       out.println("      <div class='pokemon-screen'>");
+       out.println("        <div class='pokemon-field'>");
+       out.println("          <span class='pokemon-label'>Current theme:</span>");
+       out.println("          <span class='pokemon-value'>" + currentTheme + "</span>");
+       out.println("        </div>");
+       out.println("        <div class='pokemon-field'>");
+       out.println("          <span class='pokemon-label'>Current language:</span>");
+       out.println("          <span class='pokemon-value'>" + currentLanguage + "</span>");
+       out.println("        </div>");
+       out.println("      </div>");
+       out.println("    </div>");
+       out.println("  </div>");
+       out.println("</div>");
+       out.println("<div class='registration-section'>");
+       out.println("  <h2 class='pokedex-header'>Update Preferences</h2>");
+       out.println("  <form method='POST' action='/preferences'>");
+       out.println("    <div class='input-group'>");
+       out.println("      <label class='form-label'>Theme:</label>");
+       out.println("      <input type='radio' name='theme' value='light' " +
           (currentTheme.equals("light") ? "checked" : "") + "> Light");
-       out.println("    <input type='radio' name='theme' value='dark' " +
+       out.println("      <input type='radio' name='theme' value='dark' " +
           (currentTheme.equals("dark") ? "checked" : "") + "> Dark");
-       out.println("  </label>");
-       out.println("  <label for='language'>Language: ");
-       out.println("    <select name='language'>");
-       out.println("      <option value='EN'>English</option>");
-       out.println("      <option value='NL'>Nederlands</option>");
-       out.println("    </select>");
-       out.println("  </label>");
-       out.println("  <button type='submit'>Save preferences</button>");
-       out.println("</form>");
-       out.println("<hr>");
-       out.println("<button onclick=\"location.href='/welcome'\">Home</button>");
-       out.println("</body></html>");
+       out.println("    </div>");
+       out.println("    <div class='input-group'>");
+       out.println("      <label class='form-label' for='language'>Language:</label>");
+       out.println("      <select class='form-input' name='language'>");
+       out.println("        <option value='EN'" + (currentLanguage.equals("EN") ? " selected" : "") + ">English</option>");
+       out.println("        <option value='NL'" + (currentLanguage.equals("NL") ? " selected" : "") + ">Nederlands</option>");
+       out.println("      </select>");
+       out.println("    </div>");
+       out.println("    <button class='form-button' type='submit'>Save preferences</button>");
+       out.println("  </form>");
+       out.println("</div>");
+       out.println("<div class='registration-section'>");
+       out.println("  <button class='form-button' onclick=\"location.href='/welcome'\">Back to Home</button>");
+       out.println("</div>");
+
+       closeHtmlAndBodyTags(response);
     }
 
     @Override
