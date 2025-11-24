@@ -118,7 +118,7 @@ document.getElementById('move-form').addEventListener('submit', function (event)
 
 document.getElementById('pokedex-form').addEventListener('submit', function (event) {
     event.preventDefault();
-    document.location.href = "/welcome";
+    document.location.href = "/pap";
 });
 
 // document.getElementById('pokedex-form').addEventListener('submit', function (event) {

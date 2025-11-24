@@ -87,7 +87,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  <a href='/preferences'>⚙️ " + getText("preferences", language) + "</a>");
 		out.println("  <br><br>");
 		out.println("  <div style='text-align: center;'>");
-		out.println("    <form method='POST' action='/welcome' style='display: inline;'>");
+		out.println("    <form method='POST' action='/pap' style='display: inline;'>");
 		out.println("      <input type='hidden' name='action' value='changeLanguage'>");
 		out.println("      <label>" + getText("language", language) + ": ");
 		out.println("        <select name='language' onchange='this.form.submit()'>");
@@ -179,7 +179,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 			languageCookie.setPath("/");
 			languageCookie.setHttpOnly(true);
 			response.addCookie(languageCookie);
-			response.sendRedirect("/welcome");
+			response.sendRedirect("/pap");
 		} else {
 			response.sendRedirect("/pokemon/name");
 		}
