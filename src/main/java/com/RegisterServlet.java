@@ -27,7 +27,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
         HttpSession session = request.getSession(false);
         // User is already logged in
         if (session != null && session.getAttribute("username") != null)
-            response.sendRedirect("/welcome");
+            response.sendRedirect("/pap");
 
 		out.println("<div class='pokemon-container'>");
 		out.println("<h1>Welcome trainer!</h1>");
@@ -79,7 +79,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
 			HttpSession session = request.getSession(true);
 			session.setAttribute("username", username);
 
-			response.sendRedirect("/welcome");
+			response.sendRedirect("/pap");
 		}
 	}
 

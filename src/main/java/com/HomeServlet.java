@@ -52,7 +52,7 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 			session.setAttribute("name", name);
 			session.setAttribute("password", password);
 
-			response.sendRedirect("/welcome");
+			response.sendRedirect("/pap");
 		}
 	}
 }

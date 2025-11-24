@@ -96,7 +96,7 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        out.println("  </form>");
        out.println("</div>");
        out.println("<div class='registration-section'>");
-       out.println("  <button class='form-button' onclick=\"location.href='/welcome'\">Back to Home</button>");
+       out.println("  <button class='form-button' onclick=\"location.href='/pap'\">Back to Home</button>");
        out.println("</div>");
 
        closeHtmlAndBodyTags(response);

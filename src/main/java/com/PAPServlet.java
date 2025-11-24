@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpSession;
 
 import entities.Pokemon;
 
-@WebServlet("/welcome")
-public class WelcomeServlet extends HttpServlet implements AbstractServletInterface
+@WebServlet("/pap")
+public class PAPServlet extends HttpServlet implements AbstractServletInterface
 {
 
 	private static final long serialVersionUID = 1L;
