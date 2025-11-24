@@ -50,6 +50,87 @@ public interface AbstractServletInterface {
 		return response;
 	}
 
+	default String getCurrentLanguage(HttpServletRequest request) {
+		String language = "en"; // Default language
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("language")) {
+					language = cookie.getValue().toLowerCase();
+					break;
+				}
+			}
+		}
+		return language;
+	}
+
+	default String getText(String key, String language) {
+		switch (key) {
+			case "welcome":
+				return language.equals("nl") ? "Welkom" : "Welcome";
+			case "hello_trainer":
+				return language.equals("nl") ? "Hallo trainer" : "Hello trainer";
+			case "my_pokedex":
+				return language.equals("nl") ? "Mijn Pokedex" : "My Pokedex";
+			case "name":
+				return language.equals("nl") ? "Naam" : "Name";
+			case "type":
+				return language.equals("nl") ? "Type" : "Type";
+			case "pokedex_number":
+				return language.equals("nl") ? "Pokedex Nummer" : "Pokedex Number";
+			case "favorite_move":
+				return language.equals("nl") ? "Favoriete Aanval" : "Favorite Move";
+			case "pokemon_registration":
+				return language.equals("nl") ? "Ga naar pokemon registratie" : "Go to pokemon registration";
+			case "submit":
+				return language.equals("nl") ? "Versturen" : "Submit";
+			case "new_pokemon_entry":
+				return language.equals("nl") ? "Nieuwe Pokemon Invoer" : "New Pokemon Entry";
+			case "choose_name":
+				return language.equals("nl") ? "Kies een naam" : "Choose a name";
+			case "pokemon_name":
+				return language.equals("nl") ? "Pokemon Naam" : "Pokemon Name";
+			case "next":
+				return language.equals("nl") ? "Volgende" : "Next";
+			case "pokemon_type":
+				return language.equals("nl") ? "Pokemon Type" : "Pokemon Type";
+			case "choose_type":
+				return language.equals("nl") ? "Kies type voor je Pokemon" : "Choose type for your Pokemon";
+			case "pokemon_move":
+				return language.equals("nl") ? "Pokemon Aanval" : "Pokemon Move";
+			case "choose_move":
+				return language.equals("nl") ? "Kies aanval voor je Pokemon" : "Choose move for your Pokemon";
+			case "move":
+				return language.equals("nl") ? "Aanval" : "Move";
+			case "enter_pokedex_number":
+				return language.equals("nl") ? "Voer Pokedex nummer in" : "Enter Pokedex Number";
+			case "number":
+				return language.equals("nl") ? "Nummer" : "Number";
+			case "show_overview":
+				return language.equals("nl") ? "Toon Overzicht" : "Show Overview";
+			case "preferences":
+				return language.equals("nl") ? "Voorkeuren" : "Preferences";
+			case "current_theme":
+				return language.equals("nl") ? "Huidig thema" : "Current theme";
+			case "current_language":
+				return language.equals("nl") ? "Huidige taal" : "Current language";
+			case "theme":
+				return language.equals("nl") ? "Thema" : "Theme";
+			case "language":
+				return language.equals("nl") ? "Taal" : "Language";
+			case "light":
+				return language.equals("nl") ? "Licht" : "Light";
+			case "dark":
+				return language.equals("nl") ? "Donker" : "Dark";
+			case "save_preferences":
+				return language.equals("nl") ? "Voorkeuren Opslaan" : "Save Preferences";
+			case "home":
+				return language.equals("nl") ? "Thuis" : "Home";
+			default:
+				return key;
+		}
+	}
+
 	default void addThemedPokemonStyling(HttpServletResponse response, HttpServletRequest request) throws IOException
 	{
 		PrintWriter out = response.getWriter();

@@ -58,17 +58,21 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        out.println("  .form-label { color: " + textColor + " !important; }");
        out.println("  .pokemon-field { background-color: " + (currentTheme.equals("dark") ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)") + " !important; }");
        out.println("</style>");
+
+       // Get current language for display
+       String displayLanguage = currentLanguage.toLowerCase();
+
        out.println("<div class='pokedex-container'>");
-       out.println("  <h1 class='pokedex-header'>Preferences</h1>");
+       out.println("  <h1 class='pokedex-header'>" + getText("preferences", displayLanguage) + "</h1>");
        out.println("  <div class='pokemon-card'>");
        out.println("    <div class='pokemon-info'>");
        out.println("      <div class='pokemon-screen'>");
        out.println("        <div class='pokemon-field'>");
-       out.println("          <span class='pokemon-label'>Current theme:</span>");
-       out.println("          <span class='pokemon-value'>" + currentTheme + "</span>");
+       out.println("          <span class='pokemon-label'>" + getText("current_theme", displayLanguage) + ":</span>");
+       out.println("          <span class='pokemon-value'>" + getText(currentTheme.toLowerCase(), displayLanguage) + "</span>");
        out.println("        </div>");
        out.println("        <div class='pokemon-field'>");
-       out.println("          <span class='pokemon-label'>Current language:</span>");
+       out.println("          <span class='pokemon-label'>" + getText("current_language", displayLanguage) + ":</span>");
        out.println("          <span class='pokemon-value'>" + currentLanguage + "</span>");
        out.println("        </div>");
        out.println("      </div>");
@@ -76,27 +80,27 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        out.println("  </div>");
        out.println("</div>");
        out.println("<div class='registration-section'>");
-       out.println("  <h2 class='pokedex-header'>Update Preferences</h2>");
+       out.println("  <h2 class='pokedex-header'>" + getText("preferences", displayLanguage) + "</h2>");
        out.println("  <form method='POST' action='/preferences'>");
        out.println("    <div class='input-group'>");
-       out.println("      <label class='form-label'>Theme:</label>");
+       out.println("      <label class='form-label'>" + getText("theme", displayLanguage) + ":</label>");
        out.println("      <input type='radio' name='theme' value='light' " +
-          (currentTheme.equals("light") ? "checked" : "") + "> Light");
+          (currentTheme.equals("light") ? "checked" : "") + "> " + getText("light", displayLanguage));
        out.println("      <input type='radio' name='theme' value='dark' " +
-          (currentTheme.equals("dark") ? "checked" : "") + "> Dark");
+          (currentTheme.equals("dark") ? "checked" : "") + "> " + getText("dark", displayLanguage));
        out.println("    </div>");
        out.println("    <div class='input-group'>");
-       out.println("      <label class='form-label' for='language'>Language:</label>");
+       out.println("      <label class='form-label' for='language'>" + getText("language", displayLanguage) + ":</label>");
        out.println("      <select class='form-input' name='language'>");
        out.println("        <option value='EN'" + (currentLanguage.equals("EN") ? " selected" : "") + ">English</option>");
        out.println("        <option value='NL'" + (currentLanguage.equals("NL") ? " selected" : "") + ">Nederlands</option>");
        out.println("      </select>");
        out.println("    </div>");
-       out.println("    <button class='form-button' type='submit'>Save preferences</button>");
+       out.println("    <button class='form-button' type='submit'>" + getText("save_preferences", displayLanguage) + "</button>");
        out.println("  </form>");
        out.println("</div>");
        out.println("<div class='registration-section'>");
-       out.println("  <button class='form-button' onclick=\"location.href='/pap'\">Back to Home</button>");
+       out.println("  <button class='form-button' onclick=\"location.href='/pap'\">" + getText("home", displayLanguage) + "</button>");
        out.println("</div>");
 
        closeHtmlAndBodyTags(response);
