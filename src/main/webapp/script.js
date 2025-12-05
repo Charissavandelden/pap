@@ -1,15 +1,11 @@
 let pokedex = document.getElementById('pokedex');
-let stap1 = document.getElementById("stap1");
-let stap2 = document.getElementById("stap2");
-let stap3 = document.getElementById("stap3");
-let stap4 = document.getElementById("stap4");
-let stap5 = document.getElementById("stap5");
-let stap6 = document.getElementById("stap6");
-
+let welcomePage = document.getElementById("welcomepage");
+let namePage = document.getElementById("namepage");
+let typePage = document.getElementById("typepage");
+let movePage = document.getElementById("movepage");
+let pokedexNumberPage = document.getElementById("pokedexnumberpage");
 
 document.getElementById('registratie-form').addEventListener('submit', function (event) {
-    console.log('Registratie');
-
     event.preventDefault();
 
     fetch("/pokemon/name", {
@@ -20,19 +16,12 @@ document.getElementById('registratie-form').addEventListener('submit', function 
     })
         .then(response => {
             pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'block';
-
-            console.log("1");
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            welcomePage.style.display = 'none';
+            namePage.style.display = 'block';
         })
         .catch(error => {
             console.error('AJAX error:', error);
         });
-
-
 });
 
 document.getElementById('name-form').addEventListener('submit', function (event) {
@@ -45,18 +34,10 @@ document.getElementById('name-form').addEventListener('submit', function (event)
         },
     })
         .then(response => {
-
-
             pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'block';
-
-            console.log("2");
-
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            welcomePage.style.display = 'none';
+            namePage.style.display = 'none';
+            typePage.style.display = 'block';
         })
         .catch(error => {
             console.error('AJAX error:', error);
@@ -73,19 +54,11 @@ document.getElementById('type-form').addEventListener('submit', function (event)
         },
     })
         .then(response => {
-
-
             pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'none';
-            stap4.style.display = 'block';
-
-            console.log("3");
-
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            welcomePage.style.display = 'none';
+            namePage.style.display = 'none';
+            typePage.style.display = 'none';
+            movePage.style.display = 'block';
         })
         .catch(error => {
             console.error('AJAX error:', error);
@@ -103,13 +76,11 @@ document.getElementById('move-form').addEventListener('submit', function (event)
     })
         .then(response => {
             pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'none';
-            stap4.style.display = 'none';
-            stap5.style.display = 'block';
-
-            console.log("4");
+            welcomePage.style.display = 'none';
+            namePage.style.display = 'none';
+            typePage.style.display = 'none';
+            movePage.style.display = 'none';
+            pokedexNumberPage.style.display = 'block';
         })
         .catch(error => {
             console.error('AJAX error:', error);
