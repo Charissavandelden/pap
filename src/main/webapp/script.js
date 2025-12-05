@@ -139,3 +139,19 @@ document.getElementById('pokedex-form').addEventListener('submit', function (eve
 //             console.error('AJAX error:', error);
 //         });
 // });
+
+// place holder voor dropdown
+function selectPokemon(pokemonValue) {
+    console.log('Selected Pokemon:', pokemonValue);
+
+    if (pokemonValue === 'pikachu') {
+        console.log('Displaying Pikachu');
+    } else if (pokemonValue.startsWith('placeholder')) {
+        console.log('Empty slot selected');
+    } else {
+        console.log('Displaying other Pokemon:', pokemonValue);
+    }
+
+  // in de toekomst ophale ergens vandaan
+}
+

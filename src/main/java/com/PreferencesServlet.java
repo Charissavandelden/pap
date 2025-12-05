@@ -63,6 +63,7 @@ public class PreferencesServlet extends HttpServlet implements AbstractServletIn
        String displayLanguage = currentLanguage.toLowerCase();
 
        out.println("<div class='pokedex-container'>");
+       out.println("  <a href='/register' class='home-icon-link'></a>");
        out.println("  <h1 class='pokedex-header'>" + getText("preferences", displayLanguage) + "</h1>");
        out.println("  <div class='pokemon-card'>");
        out.println("    <div class='pokemon-info'>");

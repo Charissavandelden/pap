@@ -21,6 +21,7 @@ public class HomeServlet extends HttpServlet implements AbstractServletInterface
 		PrintWriter out = response.getWriter();
 
 		out.println("<div class='pokemon-container'>");
+		out.println("  <a href='/register' class='home-icon-link'></a>");
 		out.println("<h1>Pokemon Login</h1>");
 
 		out.println("<h2>Login or Register:</h2>");

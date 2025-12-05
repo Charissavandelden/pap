@@ -30,6 +30,7 @@ public class RegisterServlet extends HttpServlet implements AbstractServletInter
             response.sendRedirect("/pap");
 
 		out.println("<div class='pokemon-container'>");
+		out.println("  <a href='/register' class='home-icon-link'></a>");
 		out.println("<h1>Welcome trainer!</h1>");
 
 		if (Boolean.parseBoolean(request.getParameter("success")))

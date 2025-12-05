@@ -3,6 +3,7 @@
     margin: 30px auto;
     font-family: 'Courier New', monospace;
     perspective: 1000px;
+    position: relative;
 }
 
 .pokemon-card {
@@ -43,7 +44,7 @@
 
 .pokemon-card h3 {
     position: absolute;
-    top: 60px;
+    top: 55px;
     left: 25px;
     color: #fff;
     margin: 0;
@@ -147,5 +148,435 @@
 
 .registration-section button:hover {
     background-color: #aa0000;
+}
+
+/* Pokemon container styling voor registratie pagina's */
+.pokemon-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #cc0000;
+    border-radius: 20px;
+    border: 5px solid #990000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    color: white;
+    font-family: 'Courier New', monospace;
+    position: relative;
+}
+
+.pokemon-container::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #4dd0e1, #0288d1);
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(77, 208, 225, 0.8);
+}
+
+.pokemon-container::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 55px;
+    width: 15px;
+    height: 15px;
+    background: #ff0000;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* Home icon link styling */
+.home-icon-link {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.home-icon-link:hover {
+    transform: scale(1.1);
+}
+
+.pokemon-container h1,
+.pokemon-container h2 {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+}
+
+.pokemon-container form {
+    margin-top: 20px;
+}
+
+.pokemon-container label {
+    display: block;
+    margin: 15px 0;
+    font-weight: bold;
+    color: white;
+}
+
+.pokemon-container input[type="text"],
+.pokemon-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.pokemon-container button {
+    background-color: #333;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 10px 5px;
+    border: 2px solid #555;
+}
+
+.pokemon-container button:hover {
+    background-color: #555;
+    border-color: #777;
+}
+
+/* Pokemon Entry Form Styling */
+.pokemon-entry-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 3px solid #cc0000;
+    position: relative;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.pokemon-entry-card::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #4dd0e1, #0288d1);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 8px rgba(77, 208, 225, 0.6);
+}
+
+.pokemon-entry-card::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    width: 12px;
+    height: 12px;
+    background: #ff0000;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* Make home icon work on pokemon-entry-card too */
+.pokemon-entry-card .home-icon-link {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.pokemon-entry-card h3 {
+    color: #cc0000;
+    text-align: center;
+    margin: 0 0 25px 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.pokemon-entry-form {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 25px;
+    border: 2px solid #ddd;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #cc0000;
+    box-shadow: 0 0 5px rgba(204, 0, 0, 0.3);
+}
+
+.form-button {
+    background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #990000;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.form-button:hover {
+    background: linear-gradient(135deg, #aa0000 0%, #770000 100%);
+    border-color: #770000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Pokemon Dropdown */
+.pokemon-selector {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pokemon-dropdown {
+    background-color: #fff;
+    border: 3px solid #cc0000;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    min-width: 250px;
+    text-align: center;
+}
+
+.pokemon-dropdown:focus {
+    outline: none;
+    border-color: #990000;
+    box-shadow: 0 0 8px rgba(204, 0, 0, 0.4);
+}
+
+.pokemon-dropdown option {
+    padding: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+/* Pokemon Image Placeholder */
+.pokemon-image-section {
+    flex: 0 0 150px;
+    margin-right: 20px;
+}
+
+.pokemon-image-placeholder {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 8px solid #000;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+.image-placeholder-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.image-placeholder-text {
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.image-placeholder-subtext {
+    color: #666;
+    font-size: 10px;
+    font-style: italic;
+}
+
+/* Adjust pokemon-info layout to accommodate image */
+.pokemon-info {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 50px;
+    align-items: flex-start;
+}
+
+/* 404 Error Page Styling */
+.error-title {
+    color: #cc0000;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.error-pokemon {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px dashed #cc0000;
+}
+
+.error-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.error-pokemon h2 {
+    color: #cc0000;
+    font-size: 20px;
+    margin: 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.error-message {
+    color: white;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.error-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.error-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 10px;
+    border: 2px solid #990000;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.error-button:hover {
+    background: linear-gradient(135deg, #aa0000 0%, #770000 100%);
+    border-color: #770000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.error-button.secondary {
+    background: linear-gradient(135deg, #666 0%, #333 100%);
+    border-color: #333;
+}
+
+.error-button.secondary:hover {
+    background: linear-gradient(135deg, #555 0%, #222 100%);
+    border-color: #222;
+}
+
+/* Error video styling */
+.error-video-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border: 2px solid #cc0000;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.error-video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 3px solid #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: #000;
+    outline: none;
+    object-fit: cover;
+    display: block;
+}
+
+.error-video::-webkit-media-controls {
+    display: none !important;
+}
+
+.error-video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+.error-video::-webkit-media-controls-play-button {
+    display: none !important;
+}
+
+.error-video::-webkit-media-controls-start-playback-button {
+    display: none !important;
 }
 
