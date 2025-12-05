@@ -93,8 +93,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  </div>");
 		out.println("</div>");
 
-		// pokedex weergave7
-		out.println("<div class='registration-section' id='stap1'>");
+		out.println("<div class='registration-section' id='welcomepage'>");
 		out.println("  <h2>" + getText("pokemon_registration", language) + ":</h2>");
 		out.println("  <form id='registratie-form'>");
 		out.println("    <button type='submit' id='registratie-button'>Start</button>");
@@ -115,8 +114,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  </div>");
 		out.println("</div>");
 
-		// naam entree
-		out.println("<div class='pokedex-container' id='stap2' style='display:none'>");
+		out.println("<div class='pokedex-container' id='namepage' style='display:none'>");
 		out.println("  <h1 class='pokedex-header'>" + getText("new_pokemon_entry", language) + "</h1>");
 		out.println("  <div class='pokemon-entry-card'>");
 		out.println("    <a href='/register' class='home-icon-link'></a>");
@@ -133,8 +131,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  </div>");
 		out.println("</div>");
 
-		// type entree
-		out.println("<div class='pokedex-container' id='stap3' style='display:none'>");
+		out.println("<div class='pokedex-container' id='typepage' style='display:none'>");
 		out.println("  <h1 class='pokedex-header'>" + getText("pokemon_type", language) + "</h1>");
 		out.println("  <div class='pokemon-entry-card'>");
 		out.println("    <a href='/register' class='home-icon-link'></a>");
@@ -151,8 +148,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  </div>");
 		out.println("</div>");
 
-		// move entree
-		out.println("<div class='pokedex-container' id='stap4' style='display:none'>");
+		out.println("<div class='pokedex-container' id='movepage' style='display:none'>");
 		out.println("  <h1 class='pokedex-header'>" + getText("pokemon_move", language) + "</h1>");
 		out.println("  <div class='pokemon-entry-card'>");
 		out.println("    <a href='/register' class='home-icon-link'></a>");
@@ -169,8 +165,7 @@ public class PAPServlet extends HttpServlet implements AbstractServletInterface
 		out.println("  </div>");
 		out.println("</div>");
 
-		//nummer entree
-		out.println("<div class='pokedex-container' id='stap5' style='display:none'>");
+		out.println("<div class='pokedex-container' id='pokedexnumberpage' style='display:none'>");
 		out.println("  <h1 class='pokedex-header'>" + getText("pokedex_number", language) + "</h1>");
 		out.println("  <div class='pokemon-entry-card'>");
 		out.println("    <a href='/register' class='home-icon-link'></a>");

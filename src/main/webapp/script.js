@@ -1,38 +1,76 @@
 let pokedex = document.getElementById('pokedex');
-let stap1 = document.getElementById("stap1");
-let stap2 = document.getElementById("stap2");
-let stap3 = document.getElementById("stap3");
-let stap4 = document.getElementById("stap4");
-let stap5 = document.getElementById("stap5");
-let stap6 = document.getElementById("stap6");
+let welcomePage = document.getElementById("welcomepage");
+let namePage = document.getElementById("namepage");
+let typePage = document.getElementById("typepage");
+let movePage = document.getElementById("movepage");
+let pokedexNumberPage = document.getElementById("pokedexnumberpage");
 
+// Volg de huidige pagina
+let currentPage = 'welcome';
+
+// Hulpfunctie om een specifieke pagina te tonen
+function showPage(pageName) {
+    pokedex.style.display = 'none';
+    welcomePage.style.display = 'none';
+    namePage.style.display = 'none';
+    typePage.style.display = 'none';
+    movePage.style.display = 'none';
+    pokedexNumberPage.style.display = 'none';
+
+    switch(pageName) {
+        case 'welcome':
+            welcomePage.style.display = 'block';
+            pokedex.style.display = 'block';
+            break;
+        case 'name':
+            namePage.style.display = 'block';
+            break;
+        case 'type':
+            typePage.style.display = 'block';
+            break;
+        case 'move':
+            movePage.style.display = 'block';
+            break;
+        case 'pokedexNumber':
+            pokedexNumberPage.style.display = 'block';
+            break;
+    }
+    currentPage = pageName;
+}
+
+// Navigeer naar een nieuwe pagina en zet deze in de geschiedenis via de History API.
+function navigateTo(pageName) {
+    showPage(pageName);
+    history.pushState({ page: pageName }, '', '#' + pageName);
+}
+
+// Terugknop van de browser
+window.addEventListener('popstate', function(event) {
+    if (event.state && event.state.page) {
+        showPage(event.state.page);
+    } else {
+        showPage('welcome');
+    }
+});
+
+// Initialize
+history.replaceState({ page: 'welcome' }, '', '');
 
 document.getElementById('registratie-form').addEventListener('submit', function (event) {
-    console.log('Registratie');
-
     event.preventDefault();
 
     fetch("/pokemon/name", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'  // JSON!
+            'Content-Type': 'application/json'
         },
     })
         .then(response => {
-            pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'block';
-
-            console.log("1");
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            navigateTo('name');
         })
         .catch(error => {
             console.error('AJAX error:', error);
         });
-
-
 });
 
 document.getElementById('name-form').addEventListener('submit', function (event) {
@@ -41,22 +79,11 @@ document.getElementById('name-form').addEventListener('submit', function (event)
     fetch("/pokemon/move", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'  // JSON!
+            'Content-Type': 'application/json'
         },
     })
         .then(response => {
-
-
-            pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'block';
-
-            console.log("2");
-
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            navigateTo('type');
         })
         .catch(error => {
             console.error('AJAX error:', error);
@@ -69,23 +96,11 @@ document.getElementById('type-form').addEventListener('submit', function (event)
     fetch("/pokemon/move", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'  // JSON!
+            'Content-Type': 'application/json'
         },
     })
         .then(response => {
-
-
-            pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'none';
-            stap4.style.display = 'block';
-
-            console.log("3");
-
-
-            // this.hideLoading();
-            // if (onSuccess) onSuccess(data);
+            navigateTo('move');
         })
         .catch(error => {
             console.error('AJAX error:', error);
@@ -98,18 +113,11 @@ document.getElementById('move-form').addEventListener('submit', function (event)
     fetch("/pokemon/move", {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'  // JSON!
+            'Content-Type': 'application/json'
         },
     })
         .then(response => {
-            pokedex.style.display = 'none';
-            stap1.style.display = 'none';
-            stap2.style.display = 'none';
-            stap3.style.display = 'none';
-            stap4.style.display = 'none';
-            stap5.style.display = 'block';
-
-            console.log("4");
+            navigateTo('pokedexNumber');
         })
         .catch(error => {
             console.error('AJAX error:', error);
@@ -121,24 +129,16 @@ document.getElementById('pokedex-form').addEventListener('submit', function (eve
     document.location.href = "/pap";
 });
 
-// document.getElementById('pokedex-form').addEventListener('submit', function (event) {
-//     console.log('Registratie');
-//
-//     event.preventDefault();
-//     fetch("/pokemon/move", {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'  // JSON!
-//         },
-//     })
-//         .then(response => {
-//             pokedex.style.display = 'block';
-//             console.log("6");
-//         })
-//         .catch(error => {
-//             console.error('AJAX error:', error);
-//         });
-// });
+document.addEventListener('DOMContentLoaded', function() {
+    const backButtons = document.querySelectorAll('[id^="back-button-"]');
+    backButtons.forEach(button => {
+        button.addEventListener('click', goBack);
+    });
+});
+
+function goBack() {
+    history.back();
+}
 
 // place holder voor dropdown
 function selectPokemon(pokemonValue) {
@@ -151,7 +151,4 @@ function selectPokemon(pokemonValue) {
     } else {
         console.log('Displaying other Pokemon:', pokemonValue);
     }
-
-  // in de toekomst ophale ergens vandaan
 }
-
