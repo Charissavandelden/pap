@@ -126,16 +126,34 @@ public interface AbstractServletInterface {
 				return language.equals("nl") ? "Voorkeuren Opslaan" : "Save Preferences";
 			case "home":
 				return language.equals("nl") ? "Thuis" : "Home";
+			case "page_not_found":
+				return language.equals("nl") ? "Pagina Niet Gevonden" : "Page Not Found";
+			case "pokemon_escaped":
+				return language.equals("nl") ? "Oeps! Deze Pokémon is Ontsnapt!" : "Oops! This Pokémon Escaped!";
+			case "page_not_found_message":
+				return language.equals("nl") ? "De pagina die je zoekt bestaat niet. Misschien is deze Pokémon weggelopen!" : "The page you're looking for doesn't exist. Maybe this Pokémon ran away!";
+			case "back_to_pokedex":
+				return language.equals("nl") ? "Terug naar Pokédex" : "Back to Pokédx";
+			case "video_not_supported":
+				return language.equals("nl") ? "Je browser ondersteunt deze video niet." : "Your browser does not support this video.";
+			case "server_error":
+				return language.equals("nl") ? "Server Fout" : "Server Error";
+			case "blastoise_overwhelmed":
+				return language.equals("nl") ? "Oeps! Blastoise is Overweldigd!" : "Oops! Blastoise is Overwhelmed!";
+			case "server_error_message":
+				return language.equals("nl") ? "Er is iets misgegaan op de server. Blastoise probeert het probleem het onderwater op te lossen!" : "Something went wrong on the server. Blastoise is trying to fix the problem under water!";
 			default:
 				return key;
 		}
 	}
 
-	default void addThemedPokemonStyling(HttpServletResponse response, HttpServletRequest request) throws IOException
-	{
+	default void addThemedPokemonStyling(HttpServletResponse response, HttpServletRequest request) throws IOException {
 		PrintWriter out = response.getWriter();
 
-		// Read theme from cookies
+		// voeg de css aan de class toe
+		out.println("<link rel='stylesheet' type='text/css' href='/pokestyle.css'>");
+
+		// haal het huidige gekozen thema op
 		String currentTheme = "light";
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -147,69 +165,37 @@ public interface AbstractServletInterface {
 			}
 		}
 
-		// Theme-based colors
-		String bgColor = currentTheme.equals("dark") ? "#222" : "#f0f0f0";
-		String containerBg = currentTheme.equals("dark") ? "#333" : "white";
-		String textColor = currentTheme.equals("dark") ? "#fff" : "#333";
-		String borderColor = currentTheme.equals("dark") ? "#555" : "#333";
+		// voeg de thema styling toe
+		String bgColor = currentTheme.equals("dark") ? "#222" : "#fff";
+		String textColor = currentTheme.equals("dark") ? "#fff" : "#000";
 
 		out.println("<style>");
-		out.println("  body { text-align: center; font-family: Arial, sans-serif; background-color: " + bgColor + "; color: " + textColor + "; padding: 20px; }");
-		out.println("  .pokemon-container { border: 3px solid " + borderColor + "; border-radius: 10px; padding: 30px; max-width: 400px; margin: 0 auto; background-color: " + containerBg + "; }");
-		out.println("  h1 { color: #dc3545; margin-bottom: 20px; }");
-		out.println("  h2 { color: " + textColor + "; margin-bottom: 15px; }");
-		out.println("  label { display: block; margin: 10px 0; color: " + textColor + "; }");
-		out.println("  input { padding: 5px; margin: 5px; background-color: " + containerBg + "; color: " + textColor + "; border: 1px solid " + borderColor + "; }");
-		out.println("  button { padding: 10px 20px; margin: 5px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; }");
-		out.println("  button:hover { background-color: #c82333; }");
-		out.println("  a { color: #dc3545; text-decoration: none; }");
-		out.println("  a:hover { text-decoration: underline; }");
-		out.println("</style>");
-	}
-
-	default HttpServletResponse addThemedWelcomeStyling(HttpServletResponse response, HttpServletRequest request) throws IOException
-	{
-		PrintWriter out = response.getWriter();
-
-		// Read theme from cookies
-		String currentTheme = "light";
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("theme")) {
-					currentTheme = cookie.getValue();
-					break;
-				}
-			}
-		}
-
-		// Theme-based colors
-		String bgColor = currentTheme.equals("dark") ? "#222" : "#f0f0f0";
-		String containerBg = currentTheme.equals("dark") ? "#333" : "white";
-		String textColor = currentTheme.equals("dark") ? "#fff" : "#333";
-		String borderColor = currentTheme.equals("dark") ? "#555" : "#333";
-
-		out.println("<style>");
-		out.println("  body { text-align: center; font-family: Arial, sans-serif; background-color: " + bgColor + "; color: " + textColor + "; padding: 20px; }");
-		out.println("  .pokemon-container { border: 3px solid " + borderColor + "; border-radius: 10px; padding: 30px; max-width: 400px; margin: 0 auto; background-color: " + containerBg + "; }");
-		out.println("  h1 { color: #dc3545; margin-bottom: 20px; }");
-		out.println("  h2 { color: " + textColor + "; margin-bottom: 15px; }");
-		out.println("  label { display: block; margin: 10px 0; color: " + textColor + "; }");
-		out.println("  input { padding: 5px; margin: 5px; background-color: " + containerBg + "; color: " + textColor + "; border: 1px solid " + borderColor + "; }");
-		out.println("  button { padding: 10px 20px; margin: 5px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; }");
-		out.println("  button:hover { background-color: #c82333; }");
-		out.println("  a { color: #dc3545; text-decoration: none; }");
-		out.println("  a:hover { text-decoration: underline; }");
-		// WelcomeServlet-specific overrides
-		out.println("  .pokedex-container { background-color: " + containerBg + " !important; color: " + textColor + " !important; }");
-		out.println("  .pokemon-card { background-color: " + containerBg + " !important; color: " + textColor + " !important; }");
-		out.println("  .pokemon-screen { background-color: " + (currentTheme.equals("dark") ? "#444" : "#f8f9fa") + " !important; }");
-		out.println("  .registration-section { background-color: " + containerBg + " !important; color: " + textColor + " !important; }");
-		out.println("  .pokemon-label { color: " + textColor + " !important; }");
+		out.println("  body { background-color: " + bgColor + " !important; color: " + textColor + " !important; }");
+		out.println("  .pokedex-container { background-color: " + bgColor + "; color: " + textColor + "; }");
+		out.println("  .pokemon-card { background-color: " + bgColor + "; color: " + textColor + "; }");
+		out.println("  .pokemon-container { background-color: " + bgColor + "; color: " + textColor + "; }");
+		out.println("  .pokemon-entry-card { background-color: " + (currentTheme.equals("dark") ? "#333" : "#f8f9fa") + "; color: " + textColor + "; }");
+		out.println("  .pokemon-entry-form { background-color: " + (currentTheme.equals("dark") ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)") + "; }");
+		out.println("  .pokemon-field .pokemon-value { color: " + textColor + " !important; }");
+		out.println("  .pokemon-field .pokemon-label { color: " + textColor + " !important; }");
+		out.println("  .pokemon-screen .pokemon-value { color: " + textColor + " !important; }");
+		out.println("  .pokemon-screen .pokemon-label { color: " + textColor + " !important; }");
 		out.println("  .pokedex-header { color: " + textColor + " !important; }");
+		out.println("  .registration-section { background-color: " + bgColor + "; color: " + textColor + "; }");
+		out.println("  .form-label { color: " + textColor + " !important; }");
+		out.println("  .pokemon-field { background-color: " + (currentTheme.equals("dark") ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)") + " !important; }");
+		out.println("  .pokemon-selector { background-color: " + bgColor + "; }");
+		out.println("  .pokemon-dropdown { background-color: " + (currentTheme.equals("dark") ? "#444" : "#fff") + "; color: " + textColor + "; border-color: " + (currentTheme.equals("dark") ? "#cc0000" : "#cc0000") + "; }");
+		out.println("  .image-placeholder-text { color: " + textColor + " !important; }");
+		out.println("  .image-placeholder-subtext { color: " + (currentTheme.equals("dark") ? "#aaa" : "#666") + " !important; }");
+		out.println("  .error-title { color: " + (currentTheme.equals("dark") ? "#ff6666" : "#cc0000") + " !important; }");
+		out.println("  .error-pokemon { background-color: " + (currentTheme.equals("dark") ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0.1)") + "; border-color: " + (currentTheme.equals("dark") ? "#ff6666" : "#cc0000") + "; }");
+		out.println("  .error-pokemon h2 { color: " + (currentTheme.equals("dark") ? "#ff6666" : "#cc0000") + " !important; }");
+		out.println("  .error-message { color: " + textColor + " !important; }");
+		out.println("  .error-video-container { background-color: " + (currentTheme.equals("dark") ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.1)") + "; border-color: " + (currentTheme.equals("dark") ? "#ff6666" : "#cc0000") + "; }");
+		out.println("  .error-video { border-color: " + (currentTheme.equals("dark") ? "#555" : "#333") + "; }");
+		out.println("  .home-icon-link:hover { opacity: 0.8; }");
 		out.println("</style>");
-
-		return response;
 	}
 
 }

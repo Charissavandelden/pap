@@ -152,5 +152,3 @@ function selectPokemon(pokemonValue) {
         console.log('Displaying other Pokemon:', pokemonValue);
     }
 }
-
-// in de toekomst ophale ergens vandaan
